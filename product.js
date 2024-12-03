@@ -30,7 +30,7 @@ function updateCartDisplay() {
         itemDiv.innerHTML = `
             <span>${item.name}</span>
             <span>$${item.price}</span>
-            <button onclick="removeItemFromCart(${item.id})">Remove</button>
+            <button onclick="removeItemFromCart('${item.id}')">Remove</button>
         `;
         cartContainer.appendChild(itemDiv);
         total += item.price;
@@ -46,5 +46,6 @@ function removeItemFromCart(productId) {
     localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     updateCartDisplay();
 }
-// Call updateCartDisplay when the page loads
+
+// Initialize cart display on page load
 document.addEventListener('DOMContentLoaded', updateCartDisplay);
