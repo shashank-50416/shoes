@@ -1,11 +1,12 @@
 // Function to add product to cart
 function addToCart(button) {
     const card = button.closest('.card');
+    const productImage = card.querySelector('img').src; // Correct way to access image source
     const productId = card.dataset.id;
     const productName = card.querySelector('h3').textContent;
     const productPrice = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
 
-    const product = { id: productId, name: productName, price: productPrice };
+    const product = { id: productId, name: productName, price: productPrice, image: productImage }; // Add image to the product object
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push(product);
@@ -28,6 +29,7 @@ function updateCartDisplay() {
         itemDiv.dataset.id = item.id;
 
         itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px;"> <!-- Display the image here -->
             <span>${item.name}</span>
             <span>$${item.price}</span>
             <button onclick="removeItemFromCart('${item.id}')">Remove</button>
